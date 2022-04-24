@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Discord Webhook - How to Post A Message to a Discord Channel</title>
+        <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/flatly/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="geo-fetch.js"></script>
+    </head>
+    <body>
+	<div id="jquery-script-menu">
+		<div class="jquery-script-center">
+			<div class="jquery-script-clear"></div>
+		</div>
+	</div>
+	<div class="container">
+	<hr>        	
+	
+	<h2>DateTimeStamp</h2>
+	<div id="curDateTime" class="alert alert-danger my-5 text-wrap"></div>		
+	<hr>
+	<h2>Your IP Info (JSON) sent to Discord</h2>
+	<div id="params" class="alert alert-danger my-5 text-wrap"></div>		
+	
+	<h2>Your IP sent to Discord</h2>
+	<div id="myIP" class="alert alert-danger my-5 text-wrap"></div>			
+		
+</div>
+        <script>
+            $(document).ready(()=>{			
+                $("#ip-info").html(JSON.stringify(userIPInfo));
+                console.log(userIPInfo)
+				post(JSON.stringify(userIPInfo));
+            });
+        </script>
+
+  <script>
+  function post(msg){
+	
+	const d = new Date();
+	let dtStamp = d.toJSON();
+	document.getElementById("curDateTime").innerHTML = dtStamp;	
+	
+	  
+	  const myIP = JSON.parse(msg);
+  
+      var params = {
+        username: "gioletsgo",
+        avatar_url: "",
+		embeds:[{"color": 16711680,"title":"User IP Info", "description":myIP["ip"], "timestamp": dtStamp}]		
+      }
+  	  //$.extend(params, myContent);
+	  $("#myIP").html(JSON.stringify(myIP["ip"]));
+	  $("#params").html(JSON.stringify(params));
+  
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "https://discord.com/api/webhooks/0987...");
+	xhr.setRequestHeader('Content-type', 'application/json');
+
+	xhr.send(JSON.stringify(params));
+      xhr.onreadystatechange = function() {
+        if(this.status != 200){
+          alert(this.status);
+        }
+      }
+}
+
+  </script> 
+  
+  
+  
+    </body>
+</html>
