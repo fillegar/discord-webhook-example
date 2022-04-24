@@ -8,3 +8,4 @@ Create a Discord Channel or Edit an existing one
 Create a Discord Webhook for the Discord Channel
 Create a webpage frontend that will use JavaScript to post the IP Addresses of website visitors to the Discord Channel
 
+Live example: https://www.urlblade.com/discord-webhooks
